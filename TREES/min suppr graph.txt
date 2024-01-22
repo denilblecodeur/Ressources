@@ -1,0 +1,7 @@
+p153
+Variante du problème du plus long chemin dans un graphe:
+
+On veut supprimer le moins d'arêtes possible dans un arbre afin que dans les arbres résultants aucun chemin ne dépasse la longueur R. Pour résoudre ce problème, il suffit de supprimer les arêtes critiques déterminées pendant la résolution du programme dynamique décrit p152.
+Considérons le traitement du sommet v avec ses fils u1,...,ud ordonnés tels que
+b[u1] <= ... <= b[ud]
+On doit supprimer l'arête (v,ud) si   b[ud]+1 > R   ou que   b[ud-1] + 2 + b[ud] > R  , puis décrémenter d et recommencer le test.

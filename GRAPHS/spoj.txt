@@ -1,0 +1,8 @@
+Cycles with minimal ratio of weight to length - Karp
+https://www.spoj.com/problems/WORDRING/
+
+Chinese postman problem
+https://www.spoj.com/problems/FTOUR/
+
+more on
+https://books.google.fr/books?id=LpcJEAAAQBAJ&pg=PA117&lpg=PA117&dq=spoj+FTOUR+-+Free+Tour+solution&source=bl&ots=Rl-uF2qq4f&sig=ACfU3U3KqnmS4mP397yBKHW5ozhINH5G5w&hl=fr&sa=X&ved=2ahUKEwi_pOmZz_77AhXcTaQEHcjMAikQ6AF6BAgWEAM#v=onepage&q&f=false

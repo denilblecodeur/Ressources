@@ -1,0 +1,15 @@
+method?
+https://www.geeksforgeeks.org/biconnected-components/
+
+https://www.spoj.com/problems/POLQUERY/
+
+https://codeforces.com/problemset/problem/193/A
+
+https://www.spoj.com/problems/SUBMERGE/
+
+
+1. UVa 00315 - Network * (finding articulation points)
+2. UVa 00610 - Street Directions (finding bridges)
+3. UVa 00796 - Critical Links * (finding bridges)
+4. UVa 10199 - Tourist Guide (finding articulation points)
+5. UVa 10765 - Doves and Bombs * (finding articulation points)

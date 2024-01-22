@@ -1,0 +1,4 @@
+1. Find out the factors of A and B along with their count
+2. Check if both A and B have the same prime factors
+3. Simplify count_a/count_b for each prime factor
+4. Check if the ratio of all pairs of count are equal for each factors

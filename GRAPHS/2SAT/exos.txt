@@ -1,0 +1,16 @@
+https://open.kattis.com/problems/manhattan
+https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1260
+
+https://www.spoj.com/problems/TORNJEVI/
+
+On Manhattan:
+UVa 10319 - Manhattan * (the hard part in solving problems involving 2- SAT is in identifying that it is indeed a 2-SAT problem and then building the implication graph; for this problem, we set each street and each avenue as a variable where true means that it can only be used in a certain direction and false means that it can only be used in the other direction; a simple path will be in one of this form: (street a ∧ avenue b) ∨ (avenue c ∧ street d); this can be transformed into 2-CNF formula of (a∨c)∧(a∨d)∧(b∨c)∧(b∨d); build the implication graph and check if it is satisfiable using the SCC check as shown above; note that there exists a special case where the clause only has one literal, i.e. the simple path uses one street only or one avenue only.)
+
+On 2-sat:
+https://cp-algorithms.com/graph/2SAT.html#algorithm
+
+https://www.spoj.com/problems/SOPARADE/
+HORN:
+https://fr.wikipedia.org/wiki/Horn-satisfiabilit%C3%A9
+https://www.codingame.com/ide/puzzle/horn-sat-solver
+https://tryalgo.org/en/satisfiability/2016/12/04/horn-sat/

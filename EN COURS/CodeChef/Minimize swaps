@@ -1,0 +1,98 @@
+#Minimize swaps
+"""
+Given a binary string, find the minimum number of adjacent swaps needed to make it divisible by 3, or claim that it cannot be achieved.
+
+All solutions will use a two main observations:
+- The answer is small (≤3) (which follows as a result of the next observation); and
+- The only thing that matters is whether each 11 in the string is on an even or odd position.
+
+Now, let’s analyze some cases.
+
+- The spoiler above allows us to easily compute the value of the string modulo 3. If this is 0, then no swaps are needed at all.
+- If every character is the same, swaps achieve nothing. So, if the answer isn’t 0 from above, then it’s -1.
+- The next case is when there’s only one 1 (or one 0).
+In this case, there’s essentially one type of swap available (moving a single 1 from even to odd or vice versa),
+so perform this swap and check whether the resulting string is 0 mod 3. The answer is either 1 or -1.
+
+Now we’re left with only strings such that there are at least two each of 0's and 1's.
+
+There are, once again, two cases to deal with here:
+
+The first is when the string looks like 1111...11000...000 or its reverse.
+This case requires either one or three swaps, with the final string being 111...110100...0 or 111...111010100...0.
+Check if one swap is enough; if not the answer is 3
+
+Finally, we have the case when none of the above hold. This case can always be solved in ≤2 swaps.
+
+Given the case that we are in, the string will always contain two non-intersecting 10/01 substrings,
+i.e, two non-intersecting substrings of length 2 with different characters.
+
+If swapping any one of these substrings makes the string divisible by 3, great.
+Otherwise, swapping both pairs will always make the string divisible by 3.
+So, simply check if some adjacent swap can make the string divisible by 3. If this can’t happen, the answer is 2.
+
+SOLUTION
+Odd position = -2
+even position = -1
+
+find a zero at odd position
+
+11010
+replace even pos 1 with 2 and odd pos 1 with 1... Keep zero as it is...
+
+1 0
+2 0
+
+max 2 moves required???
+
+Solution - 
+
+mod = int % 3
+"""
+for t in range(int(input())):
+    s = str(input())
+
+    if s.count("1") == 1:
+        print(-1)
+        continue
+
+    n = int(s, 2)
+    mod = n % 3
+    # If already zero
+    if mod == 0:
+        print(0)
+        continue
+
+    a = []
+    s = s[::-1]
+
+    for i in range(len(s)):
+        if i % 2 == 1 and s[i] == "1":
+            a.append(2)
+        else:
+            a.append(int(s[i]))
+
+    # Check If can be solved in single operation
+    flag = False
+
+    for i in range(len(a) - 1):
+        if (a[i] == 3 - mod and a[i + 1] == 0) or (a[i + 1] == 3 - mod and a[i] == 0):
+            flag = True
+
+    if flag:
+        print(1)
+    else:
+
+        count = 0
+
+        for i in range(len(a)):
+            if a[i] == 0:
+                if (i > 0 and a[i - 1] == mod) or (i < len(a) - 1 and a[i + 1] == mod):
+                    count += 1
+
+        if count >= 2:
+            print(2)
+        elif "1100" in s or "0011" in s:
+            print(3)
+        else:
+            print(-1)

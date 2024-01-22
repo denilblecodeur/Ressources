@@ -1,0 +1,8 @@
+Applications
+
+Étant donné un graphe acyclique et deux sommets s, t, on peut souhaiter compter le nombre de chemins de s à t, ou connaître le chemin le plus long lorsqu'il y a des poids sur les arcs. Une solution en temps linéaire consiste à effectuer un tri topologique et dérouler un programme dynamique sur les noeuds dans cet ordre.
+Par exemple le programme dynamique P[s] = 0, P[v] = 1 + maxuP[u] calcule le plus long chemin de s à t où la maximisation est faite sur tous les arcs (u, v) entrant en v.
+
+https://www.spoj.com/problems/ALL/
+
+UVa 11094 - Continents * (tricky flood fill as it involves scrolling)

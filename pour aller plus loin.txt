@@ -1,0 +1,26 @@
+TO EXPLAIN:
+
+Dijkstra weight + limits (EnvFrTrvl, FtheInn, isograd, Fishmonger)
+
+Compute BCC:
+https://judge.yosupo.jp/problem/biconnected_components
+https://usaco.guide/adv/BCC-2CC?lang=py#tutorial
+https://judge.yosupo.jp/submission/96114
+
+Eulerian tour/DeBruijn sequences and cf problem (cses, Tanya and Password)
+
+
+POUR ALLER PLUS LOIN:
+
+https://www.geeksforgeeks.org/top-algorithms-and-data-structures-for-competitive-programming/
+
+https://brilliant.org/wiki/hungarian-matching/
+
+http://courses.csail.mit.edu/6.854/16/Notes/n9-advanced_flow_algorithms.html
+
+http://www.france-ioi.org/algo/task.php?idChapter=534&iOrder=10
+
+Github python library
+https://github.com/cheran-senthil/PyRival
+
+https://tryalgo.org/en/graphs/2022/11/03/optimal-search-tree/
