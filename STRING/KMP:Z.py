@@ -23,6 +23,8 @@ def compute_lps(pattern):
 # which is also a prefix of str[0..n-1]
 #
 # i + Z[i] == n -> prefix suffix
+#
+# Si recherche de motif, concaténer motif devant la string
 Z = [0] * n
 l = r = 0
 for i in range(1, n):

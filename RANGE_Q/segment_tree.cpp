@@ -68,6 +68,7 @@ void push() {
 // LAZY PROPAGATION
 
 // Assignment on segments
+// seg 0-indexed
 // tl, tr boundaries : set tl = 0 and tr = n - 1
 // update(1, 0, n - 1, l, r, v);
 // get(1, 0, n - 1, i);

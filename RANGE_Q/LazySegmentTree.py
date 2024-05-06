@@ -83,6 +83,7 @@ class LazySegmentTree:
         return res
  
     def __getitem__(self, idx):
+        # be careful with default of query
         return self.query(idx, idx + 1)
  
     def __repr__(self):
@@ -171,6 +172,7 @@ class LazySegmentTree:
         return res
  
     def __getitem__(self, idx):
+        # be careful with default of query
         return self.query(idx, idx + 1)
  
     def __repr__(self):

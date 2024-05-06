@@ -1,3 +1,5 @@
+# Max Reactangle Area in Histogram
+
 def compute_extension(a):
     extension = [0]
     ms = [0]

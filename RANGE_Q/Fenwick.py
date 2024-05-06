@@ -1,7 +1,7 @@
 # FENWICK point update range query
 
 def update(pos, v):
-    while pos < n:
+    while pos < len(T):
         T[pos] += v
         pos |= pos + 1
 
@@ -23,6 +23,30 @@ for i in range(n):
     if j < n: T[j] += T[i]
 query(l, r + 1) # [l, r] 0-indexed
 update(pos, newvalue - X[pos]); X[pos] = newvalue # pos 0-indexed
+
+
+# Range update Point query
+#
+# T length n+1
+# query and updates 0-indexed
+
+def update_(i, val):
+    i = i + 1
+    while i <= len(T):
+        T[i] += val
+        i += i & (-i)
+
+def update(l, r, val): # [l, r]
+    update_(l, val)
+    update_(r+1, -val)
+
+def query(i):
+    res = 0
+    i = i + 1
+    while i > 0:
+        res += T[i]
+        i -= i & (-i)
+    return res
 
 # FENWICK 1-indexed rangesum rangequery
 

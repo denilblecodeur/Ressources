@@ -1,5 +1,37 @@
 #Maximum flow - Ford-Fulkerson O(V * E * Capa_max)
 
+def get_maxflow(adj, capacity, s, t):
+    n = len(adj)
+    par = [-1] * n
+    def augment():
+        for i in range(n):
+            par[i] = -1
+        par[s] = -2
+        q = [(s, 1<<59)]
+        while len(q) > 0:
+            x, flow = q.pop()
+            for y in adj[x]:
+                if par[y] == -1 and capacity[x][y] > 0:
+                    par[y] = x
+                    new_flow = min(flow, capacity[x][y])
+                    if y == t:
+                        return new_flow
+                    q.append((y, new_flow))
+        return 0
+    flow = 0
+    while True:
+        flow_delta = augment()
+        if flow_delta == 0:
+            break
+        flow += flow_delta
+        x = t
+        while x != s:
+            p = par[x]
+            capacity[p][x] -= flow_delta
+            capacity[x][p] += flow_delta
+            x = p
+    return flow
+
 # Short code #################################
 # + fonctionne si arcs bidirectionnels à capacité partagée
 
@@ -31,7 +63,7 @@ def ford_fulkerson(graph, capacity, s, t):
     return flow, sum(flow[s])     # flot, valeur du flot
 
 
-# Faster #################################
+# Alternative #################################
 
 # Ne fonctionne pas si arcs bidirectionnels à capacité partagée
 n, m = map(int, input().split())
@@ -90,7 +122,7 @@ while True:
     
 print(total)
 
-
+# Just to remind
 def add_reverse_arcs(graph, capac=None):
     """Utility function for flow algorithms that need for every arc (u,v),
     the existence of an (v,u) arc, by default with zero capacity.

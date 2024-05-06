@@ -23,6 +23,16 @@ for char in w:
 
 ### SIMPLER
 
+class Trie:
+    def __init__(self):
+        self.links = {}
+    
+    def add_word(self, word):
+        if word != '':
+            self.links.setdefault(word[0], Trie()).add_word(word[1:])
+
+# OR MINE
+
 n = int(input())
 trie = {}
 for _ in range(n):

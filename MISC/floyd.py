@@ -16,3 +16,9 @@ def floyd(x0, f):
         h = f(h)
         period += 1
     return start, period
+
+for cycle_len in range(2, 100):
+    for start in range(len(mex)-2*cycle_len):
+        if mex[start:start+cycle_len] == mex[start+cycle_len:start+2*cycle_len]:
+            print(start, cycle_len)
+            exit()

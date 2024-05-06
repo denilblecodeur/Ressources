@@ -67,21 +67,6 @@ push()
 for i in range(n):
     print(seg[N + i])
 
-# return index (works for LCA, but to test)
-class RangeQuery:
-    def __init__(self, data, func=min):
-        self.func = func
-        self._data = _data = [list(data)]
-        i, n = 1, len(_data[0])
-        while 2 * i <= n:
-            prev = _data[-1]
-            _data.append([func(prev[j], prev[j + i]) for j in range(n - 2 * i + 1)])
-            i <<= 1
- 
-    def query(self, begin, end):
-        depth = (end - begin).bit_length() - 1
-        return self.func(self._data[depth][begin], self._data[depth][end - (1 << depth)])
-
 # return index
 class SegTree: 
     def __init__(self, a):
@@ -100,7 +85,7 @@ class SegTree:
             self.t[i >> 1] = min(self.t[i], self.t[i ^ 1], key=lambda x:self.arr[x])
             i >>= 1
     
-    def query(self, l, r):
+    def query(self, l, r): # [l, r]
         ans = 0
         l += self.n
         r += self.n + 1

@@ -1,7 +1,3 @@
-TO EXPLAIN:
-
-Dijkstra weight + limits (EnvFrTrvl, FtheInn, isograd, Fishmonger)
-
 Compute BCC:
 https://judge.yosupo.jp/problem/biconnected_components
 https://usaco.guide/adv/BCC-2CC?lang=py#tutorial

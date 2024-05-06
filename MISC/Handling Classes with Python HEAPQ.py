@@ -12,3 +12,15 @@ class State:
 
 heap = [State(trainCars, (1 << numRoutes) - 1, cards)]
 cur_state = heappop(heap)
+
+# Alt
+# override __lt__ method in object class
+def __lt__(self, nxt):
+    return self.smth < nxt.smth 
+
+# Alt way dirtier
+# override heapq.cmp_lt
+import heapq
+def new_cmp_lt(self,a,b):
+    return a[1]<b[1]
+heapq.cmp_lt=new_cmp_lt
