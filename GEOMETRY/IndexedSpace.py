@@ -18,7 +18,7 @@ for coord, pts in indexed_space.items():
     x, y = coord
     for dx, dy in DIR:
         for p_neigh in indexed_space.get((x + dx, y + dy), []):
-            for p in ptd:
+            for p in pts:
                 if dist(p, p_neigh) <= K ** 2:
                     ans += 1
     for i in range(len(pts)):

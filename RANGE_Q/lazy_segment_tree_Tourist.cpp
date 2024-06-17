@@ -8,6 +8,7 @@ Exemples :
 
 Range add, Range min
 https://codeforces.com/contest/1621/submission/141513060
+https://codeforces.com/contest/1621/submission/259999415
 */
 
 class segtree {
@@ -231,3 +232,70 @@ class segtree {
     return find_last(0, 0, n - 1, ll, rr, f);
   }
 };
+
+
+// CODECHEF ADDMUL
+// https://blog.csdn.net/u013823561/article/details/47009977
+// 1-indexed
+
+const int INF = 1e9;
+const int N = 1e5+5;
+
+int data[N];
+struct node{
+    int sum;
+    int add, mul;
+    void init(){ add=0; mul=1; }
+} tree[N<<2];
+int n, q;
+void update(int l, int r, int rt, int ul, int ur, int mul, int add);
+void pushdown(int rt, int l, int r){
+    int mid = (l+r)>>1;
+    update(l, mid, rt<<1, l, mid, tree[rt].mul, tree[rt].add);
+    update(mid+1, r, rt<<1|1, mid+1, r, tree[rt].mul, tree[rt].add);
+    tree[rt].init();
+}
+int query(int l, int r, int rt, int ql, int qr){
+    if(ql <= l && r <= qr){
+        return tree[rt].sum;
+    }
+    pushdown(rt, l, r);
+    int mid = (l+r)>>1;
+    int ret = 0;
+    if(ql <= mid) ret += query(l, mid, rt<<1, ql, qr);
+    if(qr > mid) ret += query(mid+1, r, rt<<1|1, ql, qr);
+    // tree[rt].sum = (tree[rt<<1].sum + tree[rt<<1|1].sum);
+    return ret;
+}
+void update(int l, int r, int rt, int ul, int ur, int mul, int add){
+    if(ul <= l && r <= ur){
+        if(mul != 1){
+            tree[rt].sum *= mul;
+            tree[rt].add *= mul;
+            tree[rt].mul *= mul;
+        }
+        if(add){
+            int len = r - l + 1;
+            tree[rt].sum += len * add;
+            tree[rt].add += add;
+        }
+        return ;
+    }
+    pushdown(rt, l, r);
+    int mid = (l+r)>>1;
+    if(ul <= mid) update(l, mid, rt<<1, ul, ur, mul, add);
+    if(ur > mid) update(mid+1, r, rt<<1|1, ul, ur, mul, add);
+    tree[rt].sum = (tree[rt<<1].sum + tree[rt<<1|1].sum);
+}
+void build(int l, int r, int rt){
+    tree[rt].init();
+    tree[rt].sum = 0;
+    if(l == r){
+        tree[rt].sum = data[l];
+        return ;
+    }
+    int mid = (l+r)>>1
+    build(l, mid, rt<<1);
+    build(mid+1, r, rt<<1|1);
+    tree[rt].sum = (tree[rt<<1].sum + tree[rt<<1|1].sum);
+}
