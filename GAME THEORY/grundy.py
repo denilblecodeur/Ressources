@@ -19,6 +19,18 @@ def grundyValue(n):
 
 grundyValue(n)
 
+"""
+ITERATIF
+for x in range(2, n+1):
+    excluded = {mex[x-2]}
+    for i in range(2, x):
+        excluded.add(mex[i-2] ^ mex[x-i-1])
+    res = 0
+    while res in excluded:
+        res += 1
+    mex[x] = res
+"""
+
 for cycle_len in range(2, 100):
     for start in range(n-2*cycle_len):
         if mex[start:start+cycle_len] == mex[start+cycle_len:start+2*cycle_len]:

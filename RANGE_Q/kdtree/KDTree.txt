@@ -1,1 +1,2 @@
 https://acm.math.spbu.ru/~sk1/algo/kd-tree/
+https://acm.math.spbu.ru/~sk1/algo/kd-tree/1369.html

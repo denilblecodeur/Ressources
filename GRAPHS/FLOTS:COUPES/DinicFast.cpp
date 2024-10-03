@@ -1,3 +1,5 @@
+// Flow algorithm with complexity O(V.E.logU) where U = max|cap|
+// O(min(√E, E.V^{2/3})$ if U = 1; O(E.√V) for bipartite matching
 struct Dinic {
 	struct Edge {
 		int to, rev;
@@ -25,7 +27,7 @@ struct Dinic {
 	}
 	ll calc(int s, int t) {
 		ll flow = 0; q[0] = s;
-        for(int L=0; L<31; L++){
+        for(int L=0; L<31; L++){ // 'int L=30' maybe faster for random data
             do {
                 lvl = ptr = vector<int>(int((q).size()));
                 int qi = 0, qe = lvl[s] = 1;

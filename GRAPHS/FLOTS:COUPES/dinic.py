@@ -1,6 +1,8 @@
 #Dinic Maximum flow - O(V^2 * E)
 # + fonctionne si arcs bidirectionnels à capacité partagée (UVa 820)
 
+from collections import deque
+
 def dinic(source, target, graph):
     def _dinic_step(lev, u, t, limit):
         if limit <= 0: return 0

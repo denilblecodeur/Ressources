@@ -32,7 +32,7 @@ update(pos, newvalue - X[pos]); X[pos] = newvalue # pos 0-indexed
 
 def update_(i, val):
     i = i + 1
-    while i <= len(T):
+    while i < len(T):
         T[i] += val
         i += i & (-i)
 
