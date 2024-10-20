@@ -36,4 +36,23 @@ for i in range(1, n):
         l = i
         r = i + Z[i] - 1
 
-# i + Z[i] >= n => period of length i
+# i + Z[i] == n
+# -> period of length i
+# if i + Z[i] == n and n % (i+1) == 0: period = max(period, i+1)
+
+def get_lps(string: str) -> list[int]:
+    lps: list[int] = [0] * len(string)
+    length: int = 0
+    i: int = 1
+    while i < len(string):
+        if string[i] == string[length]:
+            length += 1
+            lps[i] = length
+            i += 1
+        else:
+            if length != 0:
+                length = lps[length - 1]
+            else:
+                lps[i] = 0
+                i += 1
+    return lps

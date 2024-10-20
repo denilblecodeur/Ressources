@@ -4,6 +4,8 @@
 
 # src = https://judge.yosupo.jp/submission/26494
 
+# Comment l'adapter à https://open.kattis.com/problems/mincostmaxflow ?
+
 from heapq import heappop, heappush
 INF = 1 << 60
 

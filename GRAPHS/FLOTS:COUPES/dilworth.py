@@ -5,9 +5,17 @@
 
 # Largeur d'un ordre partiel = taille de la plus grande anti-chaîne
 # Retourne partition en chaînes
+
 def dilworth(graph):
+    """
+    Produire un graphe biparti H(V-, V+, E) avec V-, V+ étant des copies de V,
+    et (u-, v+) appartient à E ssi (u, v) appartient à A
+    """
     n = len(graph)
-    match = max_bipartite_matching(graph)   # couplage maximum
+    #match = max_bipartite_matching(graph)   # couplage maximum
+    match = [None] * n
+    for a, b in bm.solve():
+        match[b] = a
     part = [None] * n                       # partition en chaînes
     nb_chains = 0
     for v in range(n - 1, -1, -1):          # dans l'ordre topologique inverse

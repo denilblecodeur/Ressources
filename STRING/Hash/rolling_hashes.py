@@ -1,5 +1,18 @@
-import sys
-input = sys.stdin.readline
+def create_string_hash(string: str, n: int, p: int, mod: int) -> tuple[list[int], list[int]]:
+    hash_prefixes: list[int] = [0] * (n + 1)
+    powers: list[int] = [1] * (n + 1)
+    for i in range(1, n + 1):
+        powers[i] = (powers[i - 1] * p) % mod
+    for i in range(n):
+        hash_prefixes[i + 1] = (hash_prefixes[i] * p + (ord(string[i]) - ord("a") + 1)) % mod
+    return hash_prefixes, powers
+
+def get_hash(hash_prefixes: list[int], powers: list[int], mod: int, i: int, j: int) -> int:
+    """
+    Returns the hash of the substring s[i:j] (j excluded) 
+    """
+    return (hash_prefixes[j] - hash_prefixes[i] * powers[j-i]) % mod
+
 
 MOD = 1_000_000_007
 P1 = 31

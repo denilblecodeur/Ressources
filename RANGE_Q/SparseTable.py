@@ -1,3 +1,24 @@
+"""
+À TESTER
+class SparseTable:
+    __slots__=('n','st','e','mx','op')
+    def __init__(self,op,e,arr):#n!=0
+        self.n=len(arr)
+        self.mx=(self.n-1).bit_length()#取不到
+        self.op=op
+        self.e=e
+        self.st=[0]*(self.n*self.mx)
+        for i in range(self.n):
+            self.st[i]=arr[i]
+        for j in range(1,self.mx):
+            for i in range(self.n-(1<<j)+1):
+                self.st[j*self.n+i]=op(self.st[i+(j-1)*self.n],self.st[i+(1<<j-1)+(j-1)*self.n])
+    def query(self,l,r):
+        if l>r:return self.e
+        s=(r-l>>1).bit_length()
+        return self.op(self.st[s*self.n+l],self.st[r-(1<<s)+1+s*self.n])
+"""
+
 class SparseTable:
     def __init__(self, arr, op=min):
         self.op = op

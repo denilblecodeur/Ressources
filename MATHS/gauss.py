@@ -30,3 +30,27 @@ for i in range(n):
         B[i][j] = c
     B[i][n + i] = 1
 P = gauss(B, n, 2 * n)
+
+# ALT
+def gauss(A):
+    n = len(A)
+    B = [[0] * 2 * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            B[i][j] = A[i][j]
+        B[i][n + i] = 1
+    for i in range(n):
+        mx = max(range(i, n), key=lambda j: abs(B[j][i]))
+        if abs(B[mx][i]) < 1e-9: continue
+        if i != mx:
+            B[i], B[mx] = B[mx], B[i]
+        for j in range(n):
+            if i == j: continue
+            temp = B[j][i] / B[i][i]
+            for k in range(i, 2 * n):
+                B[j][k] -= B[i][k] * temp
+    C = [[0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            C[i][j] = B[i][n + j] / B[i][i]
+    return C
