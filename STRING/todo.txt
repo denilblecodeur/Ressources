@@ -1,0 +1,3 @@
+Pour travailler Aho-corasick :
+https://www.spoj.com/problems/ADAJOBS/
+https://github.com/Robbinb1993/SPOJ/blob/master/ADAJOBS%20-%20Ada%20and%20Jobs.cc

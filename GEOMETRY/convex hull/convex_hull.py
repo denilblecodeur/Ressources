@@ -1,3 +1,5 @@
+# Attention aux points colliénaires verticalement
+
 eps = 1e-7
 
 def left_turn(a, b, c):

@@ -1,8 +1,10 @@
 # https://codeforces.com/contest/1215/problem/E
 
 def GospersHack(k,n):
+    # génère toutes les combinaisons possibles de k bits parmi n bits
+    if k==0: yield 0
     cur=(1<<k)-1
-    while cur<1<<n:
+    while 0<cur<1<<n:
         yield cur
         lb=cur&-cur
         r=cur+lb

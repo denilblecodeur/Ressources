@@ -1,0 +1,7 @@
+Cours:
+https://algo.is/wp-content/uploads/2015/01/aflv_10_network_flow_2.pdf
+Recopier:
+https://cp-algorithms.com/graph/flow_with_demands.html
+
+Test:
+https://codeforces.com/gym/102156/problem/C

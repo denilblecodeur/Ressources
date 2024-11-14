@@ -73,6 +73,25 @@ def gen_suffix_array_and_lcp(words):
     lcp = lcp[len(words)-1:]
     return sufarr, lcp, suf2s, s_
 
+"""
+longest_common_substring(S, T):
+    L=len(S)
+    A=S+"!"+T
+    sa = suffix_array(A)
+    lcp = lcp_array(A, sa)
+    ans = [0]*4
+    best = 0
+    for i in range(len(A)-1):
+        if (sa[i]<L)==(sa[i+1]<L): continue
+        if lcp[i]>best:
+            best=lcp[i]
+            if sa[i]<L:
+                ans=[sa[i], sa[i]+best, sa[i+1]-L-1, sa[i+1]-L-1+best]
+            else:
+                ans=[sa[i+1], sa[i+1]+best, sa[i]-L-1, sa[i]-L-1+best]
+    print(*ans)
+"""
+
 def longest_common_substring(strings, k):
     # longest common substring such that k strings shares it
     n = len(strings)
@@ -134,13 +153,3 @@ def count_unique_substrings(s):
 def count_repeated_substrings(s):
     _, lcp, _, _ = gen_suffix_array_and_lcp([s])
     return sum(max(lcp[i] - lcp[i-1], 0) for i in range(1, len(lcp)))
-
-def minRotation(s):
-    # Duval O(n)
-    a,N=0,len(s)
-    s+=s
-    for b in range(N):
-        for k in range(N):
-            if a+k==b or s[a+k]<s[b+k]:b+=max(0,k-1);break
-            if s[a+k]>s[b+k]:a=b;break
-    return a

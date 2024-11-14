@@ -19,3 +19,10 @@ A_n^k =\dfrac{n!}{(n-k)!}
 
 sous ensemble ordonné de k éléments d'un ensemble à n éléments, avec répétition :
 n^k
+
+The number of ways to put n identical objects into k labeled boxes is
+( n + k - 1)
+(     n    )
+No empty box
+( n - 1 )
+( k - 1 )

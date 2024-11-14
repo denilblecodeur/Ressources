@@ -41,5 +41,7 @@ class FenwickTree2D {
   }
 };
 
-// fenw.Modify(i, j, +1); 0-indexed
-// fenw.Query(ib, jb) - fenw.Query(ia, jb) - fenw.Query(ib, ja) + fenw.Query(ia, ja); 1-indexed
+// 0-indexed
+// FenwickTree2D<int> fenw(r, c);
+// fenw.Modify(i, j, +1);
+// fenw.Query(ib+1, jb+1) - fenw.Query(ia, jb+1) - fenw.Query(ib+1, ja) + fenw.Query(ia, ja);

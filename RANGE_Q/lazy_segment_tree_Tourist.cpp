@@ -1,17 +1,14 @@
 /*
 src: https://github.com/the-tourist/algo/blob/master/data/segtree.cpp
-
-Ne pas utiliser #define ll long long
 Déclarer segtree au début des testcase et le réinitialiser avec des segtree.modify()
-
-Exemples :
-
-Range add, Range min
-https://codeforces.com/contest/1621/submission/141513060
-https://codeforces.com/contest/1621/submission/259999415
+Exemples plus bas :
+- Range ADD, Range MUL, Range SUM
+- Range ADD, Range MINIMUM
+- Get first/last index satisfying f()
 */
 
 class segtree {
+  // ! Ne pas utiliser #define ll long long !
  public:
   struct node {
     // don't forget to set default value (used for leaves)
@@ -34,13 +31,6 @@ class segtree {
     int z = x + ((y - l + 1) << 1);
     // push from x into (x + 1) and z
     ...
-/*
-    if (tree[x].add != 0) {
-      tree[x + 1].apply(l, y, tree[x].add);
-      tree[z].apply(y + 1, r, tree[x].add);
-      tree[x].add = 0;
-    }
-*/
   }
 
   inline void pull(int x, int z) {
@@ -233,69 +223,63 @@ class segtree {
   }
 };
 
+// EXAMPLES
 
-// CODECHEF ADDMUL
-// https://blog.csdn.net/u013823561/article/details/47009977
-// 1-indexed
+/* Range ADD, Range MUL, Range SUM */
+// https://cses.fi/problemset/result/10987508/
 
-const int INF = 1e9;
-const int N = 1e5+5;
+struct node {
+  long long sum=0, add=0, mul=1;
+  void apply(int l, int r, long long vmul, long long vadd) {
+      sum = (sum * vmul) + (r - l + 1) * vadd;
+      add = (add * vmul) + vadd;
+      mul = mul * vmul;
+  }
+};
+node unite(const node &a, const node &b) const {
+  node res;
+  res.sum = a.sum + b.sum;
+  return res;
+}
+inline void push(int x, int l, int r) {
+  int y = (l + r) >> 1;
+  int z = x + ((y - l + 1) << 1);
+  if (tree[x].add != 0 || tree[x].mul != 1) {
+    tree[x + 1].apply(l, y, tree[x].mul, tree[x].add);
+    tree[z].apply(y + 1, r, tree[x].mul, tree[x].add);
+    tree[x].add = 0;
+    tree[x].mul = 1;
+  }
+}
+// + build : tree[x].apply(l, r, 1, v[l]);
 
-int data[N];
-struct node{
-    int sum;
-    int add, mul;
-    void init(){ add=0; mul=1; }
-} tree[N<<2];
-int n, q;
-void update(int l, int r, int rt, int ul, int ur, int mul, int add);
-void pushdown(int rt, int l, int r){
-    int mid = (l+r)>>1;
-    update(l, mid, rt<<1, l, mid, tree[rt].mul, tree[rt].add);
-    update(mid+1, r, rt<<1|1, mid+1, r, tree[rt].mul, tree[rt].add);
-    tree[rt].init();
+
+/* Range ADD, Range MINIMUM */
+// https://codeforces.com/contest/1621/submission/141513060
+// https://codeforces.com/contest/1621/submission/259999415
+
+struct node {
+  int add = 0, mn = 0;
+  void apply(int l, int r, int v) {
+    add += v; mn += v;
+  }
+};
+node unite(const node &a, const node &b) const {
+  node res;
+  res.mn = min(a.mn, b.mn);
+  return res;
 }
-int query(int l, int r, int rt, int ql, int qr){
-    if(ql <= l && r <= qr){
-        return tree[rt].sum;
-    }
-    pushdown(rt, l, r);
-    int mid = (l+r)>>1;
-    int ret = 0;
-    if(ql <= mid) ret += query(l, mid, rt<<1, ql, qr);
-    if(qr > mid) ret += query(mid+1, r, rt<<1|1, ql, qr);
-    // tree[rt].sum = (tree[rt<<1].sum + tree[rt<<1|1].sum);
-    return ret;
+inline void push(int x, int l, int r) {
+  int y = (l + r) >> 1;
+  int z = x + ((y - l + 1) << 1);
+  if (tree[x].add != 0) {
+    tree[x + 1].apply(l, y, tree[x].add);
+    tree[z].apply(y + 1, r, tree[x].add);
+    tree[x].add = 0;
+  }
 }
-void update(int l, int r, int rt, int ul, int ur, int mul, int add){
-    if(ul <= l && r <= ur){
-        if(mul != 1){
-            tree[rt].sum *= mul;
-            tree[rt].add *= mul;
-            tree[rt].mul *= mul;
-        }
-        if(add){
-            int len = r - l + 1;
-            tree[rt].sum += len * add;
-            tree[rt].add += add;
-        }
-        return ;
-    }
-    pushdown(rt, l, r);
-    int mid = (l+r)>>1;
-    if(ul <= mid) update(l, mid, rt<<1, ul, ur, mul, add);
-    if(ur > mid) update(mid+1, r, rt<<1|1, ul, ur, mul, add);
-    tree[rt].sum = (tree[rt<<1].sum + tree[rt<<1|1].sum);
-}
-void build(int l, int r, int rt){
-    tree[rt].init();
-    tree[rt].sum = 0;
-    if(l == r){
-        tree[rt].sum = data[l];
-        return ;
-    }
-    int mid = (l+r)>>1
-    build(l, mid, rt<<1);
-    build(mid+1, r, rt<<1|1);
-    tree[rt].sum = (tree[rt<<1].sum + tree[rt<<1|1].sum);
-}
+
+/* Get first index satisfying f */
+// https://cses.fi/problemset/result/10987756/
+
+int x = st.find_first(0, n-1, [r](const segtree::node& node) -> bool {return node.mx >= r;});
