@@ -22,7 +22,7 @@ for _ in range(n - 1):
     a, b = map(int,input().split())
     tree[a - 1].append(b - 1)
     tree[b - 1].append(a - 1)
- 
+
 prev = [None] * n
 sz = [1] * n
 ts = [-1] * n

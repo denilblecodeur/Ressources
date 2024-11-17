@@ -1,3 +1,21 @@
+def multiply(A, B):
+    C = [[0] * len(B[0]) for _ in range(len(A))]
+    for i in range(len(A)):
+        for j in range(len(B[0])):
+            for k in range(len(B)):
+                C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % mod
+    return C
+
+@bootstrap
+def power(M, p):
+    if p==0:
+        yield M
+    if p&1:
+        res = (yield power(M, p-1))
+        yield multiply(M, res)
+    res = (yield power(M, p>>1))
+    yield multiply(res, res)
+
 def binet(n):
     # fonctionne jusqu'à 72, en c++ 75 avec double
     phi = (1 + (5**.5)) / 2

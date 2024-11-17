@@ -1,49 +1,44 @@
 def cut_nodes_edges(graph):
     n = len(graph)
-    time = 0
+    t = 0
     num = [None] * n
     low = [n] * n
-    parent = [None] * n         # parent[v] = père de v, None si racine
-    critical_childs = [0] * n   #c_childs[u] = nb fils v tq low[v] >= num[u]
-    times_seen = [-1] * n
+    p = [None] * n
+    ch = [0] * n
+    ts = [-1] * n
     for start in range(n):
-        if times_seen[start] == -1:
-            times_seen[start] = 0
-            to_visit = [start]
-            while to_visit:
-                node = to_visit[-1]
-                if times_seen[node] == 0:
-                    num[node] = time
-                    time += 1
-                    #low[node] = float('inf')
-                children = graph[node]
-                if times_seen[node] == len(children):   #fin traitement
-                    to_visit.pop()
-                    up = parent[node]             # propager low au père
+        if ts[start] == -1:
+            ts[start] = 0
+            Q = [start]
+            while Q:
+                v = Q[-1]
+                if ts[v] == 0:
+                    num[v] = t
+                    t += 1
+                    #low[v] = float('inf')
+                if ts[v] == len(graph[v]):
+                    Q.pop()
+                    up = p[v]
                     if up is not None:
-                        low[up] = min(low[up], low[node])
-                        if low[node] >= num[up]:
-                            critical_childs[up] += 1
+                        low[up] = min(low[up], low[v])
+                        if low[v] >= num[up]:
+                            ch[up] += 1
                 else:
-                    child = children[times_seen[node]]     # prochain arc
-                    times_seen[node] += 1
-                    if times_seen[child] == -1:     # pas encore visité
-                        parent[child] = node        # arc de liaison
-                        times_seen[child] = 0
-                        to_visit.append(child)      # (dessous) arc retour
-                    elif num[child] < num[node] and parent[node] != child:
-                        low[node] = min(low[node], num[child])
+                    u = graph[v][ts[v]]
+                    ts[v] += 1
+                    if ts[u] == -1:
+                        p[u], ts[u] = v, 0
+                        Q.append(u)
+                    elif num[u] < num[v] and p[v] != u:
+                        low[v] = min(low[v], num[u])
     cut_edges = []
     cut_nodes = []
-    for node in range(n):
-        if parent[node] == None:
-            if critical_childs[node] >= 2:
-                cut_nodes.append(node)
+    for v in range(n):
+        if p[v] == None:
+            if ch[v] >= 2: cut_nodes.append(v)
         else:
-            if critical_childs[node] >= 1:
-                cut_nodes.append(node)
-            if low[node] >= num[node]:
-                cut_edges.append((parent[node], node))
+            if ch[v] >= 1: cut_nodes.append(v)
+            if low[v] >= num[v]: cut_edges.append((p[v], v))
     return cut_nodes, cut_edges
 
 
